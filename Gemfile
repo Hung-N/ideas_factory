@@ -30,6 +30,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'interactive_editor'
 gem 'awesome_print'
 gem 'hirb'
+gem 'cancancan'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

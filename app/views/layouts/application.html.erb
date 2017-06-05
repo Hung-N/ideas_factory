@@ -11,8 +11,26 @@
   <body>
 
     <%= link_to 'All Ideas', ideas_path %>
+    |
     <%= link_to 'Submit New Idea', new_idea_path %>
-    <%= link_to 'Sign Up', users_new_path %>
+    |
+    <% if user_signed_in? %>
+      <span style='color: red;' class="pull-right"> - Currently logged in as: <%= current_user.email %> - <%= link_to 'Log out', sessions_path, method: :delete %></span>
+    <% else %>
+
+      <%= link_to 'Log In', new_session_path %>
+      |
+      <%= link_to 'Sign Up', new_user_path %>
+    <% end %>
+
+
+
+    <% if flash[:notice] %>
+      <div class='alert alert-success'><%= flash[:notice] %></div>
+    <% elsif flash[:alert] %>
+      <div class='alert alert-danger'><%= flash[:alert] %></div>
+    <% end %>
+
 
     <%= yield %>
   </body>
