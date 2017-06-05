@@ -1,11 +1,41 @@
-<h1><%= @idea.title %></h1>
-<p><%= @idea.body %></p>
+<h1> User Idea </h1>
 <p><strong>title: </strong><%= @idea.title %></p>
 <p><strong>body: </strong><%= @idea.body %></p>
 
-<%# if (can? :destroy, @idea) %>
-  <!-- when you use the 'method: :delete' Rails will use JavaScript to mimic a delete request to the server -->
+<% if (can? :destroy, @idea) %>
   <%= link_to 'Delete', idea_path(@idea),
                                               method: :delete,
                                               data: { confirm: 'Are you sure?' } %>
-  <%# end %>
+<% end %>
+
+<% if can? :edit, @idea %>
+  <%= link_to 'Edit', edit_idea_path(@idea) %>
+<% end %>
+
+
+<h2> User Review(s) </h2>
+<% @idea.reviews.each do |review| %>
+  <p><%= review.user.try(:full_name) %> says: </p>
+  <p> <%= review.body %></p>
+
+  <% if can? :destroy, review %>
+    <%= link_to 'Delete', [@idea, review],
+      method: :delete,
+      data: {confirm: 'Are you sure?!!'}%>
+  <% end %>
+<% end %>
+
+
+
+<% if user_signed_in? %>
+  <h3> add a Review </h3>
+  <%= form_for ([@idea, @review]) do |f| %>
+  <div class="form-group">
+    Review:<%= f.text_area :body, class: 'form-control' %>
+</div>
+<div class="form-group">
+  <%= f.submit :submit, class: 'btn btn-primary'%>
+</div>
+
+<% end %>
+<% end %>

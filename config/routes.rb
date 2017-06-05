@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create]
 
-  resources :ideas
+  resources :ideas do
+    resources :reviews
+  end
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection

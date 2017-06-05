@@ -12,17 +12,17 @@ class Ability
       # end
 
       # can [:edit, :update, :destroy], Idea do |idea|
-      can :destroy, Idea do |idea|
+      can [:edit, :update, :destroy], Idea do |idea|
         idea.user == user
       end
 
-      # can :destroy, Review do |review|
-      #   review.user == user
-      # end
+      can :destroy, Review do |review|
+        review.user == user
+      end
       #
-      # can :create, Review do |review|
-      #   user != review.product.user
-      # end
+      can :create, Review do |review|
+        user != review.idea.user
+      end
 
   end
 end

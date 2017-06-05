@@ -4,12 +4,14 @@
   <tr>
     <th>Idea</th>
     <th>Body</th>
+    <th>Author</th>
   </tr>
 
   <% @ideas.each do |idea| %>
     <tr>
       <td><%= idea.title %></td>
       <td><%= idea.body %></td>
+      <td><%= idea.user.try(:full_name) %></td>
       <td><%= link_to 'Show', idea_path(idea) %></td>
     </tr>
   <% end %>

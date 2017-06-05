@@ -1,0 +1,10 @@
+<div class="container">
+  <h1> edit page </h1>
+<br>
+  <h1><%= @idea.errors.full_messages.join(', ') %></h1>
+
+<br>
+<br>
+
+
+  <%= render 'form', idea: @idea %>
