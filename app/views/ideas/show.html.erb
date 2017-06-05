@@ -2,3 +2,10 @@
 <p><%= @idea.body %></p>
 <p><strong>title: </strong><%= @idea.title %></p>
 <p><strong>body: </strong><%= @idea.body %></p>
+
+<%# if (can? :destroy, @idea) %>
+  <!-- when you use the 'method: :delete' Rails will use JavaScript to mimic a delete request to the server -->
+  <%= link_to 'Delete', idea_path(@idea),
+                                              method: :delete,
+                                              data: { confirm: 'Are you sure?' } %>
+  <%# end %>

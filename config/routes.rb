@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
 
 
+  get 'reviews/new'
+
+  get 'reviews/create'
+
+  get 'reviews/destroy'
+
   resources :users, only: [:new, :create]
 
   resources :ideas
