@@ -20,7 +20,7 @@ class IdeasController < ApplicationController
     if @idea.save
       redirect_to idea_path(@idea), notice: 'Successfully created'
     else
-      flash[:alert] = "oops, you fucked up!"
+      flash[:alert] = "oops, you fucked up! try again!"
       render :new
     end
   end
