@@ -1,7 +1,8 @@
-<h1> User Idea </h1>
-<p><strong>title: </strong><%= @idea.title %></p>
-<p><strong>body: </strong><%= @idea.body %></p>
+<h1> <%= @idea.title %> </h1>
 
+<p><strong></strong><%= @idea.body %></p>
+<strong>By: <%= @idea.user.try(:full_name) %></strong>
+<hr>
 <% if (can? :destroy, @idea) %>
   <%= link_to 'Delete', idea_path(@idea),
                                               method: :delete,
@@ -13,21 +14,33 @@
 <% end %>
 
 
-<h2> User Review(s) </h2>
+<h3> User Review(s) </h3>
 <% @idea.reviews.each do |review| %>
-  <p><%= review.user.try(:full_name) %> says: </p>
-  <p> <%= review.body %></p>
-
+  <hr>
+  <% if review.is_flagged %>
+    <p><strong> *This review has been flagged for removal* </strong></p>
+  <% else %>
+    <p><%= review.user.try(:full_name) %> says: </p>
+    <p><%= review.body %></p>
+    <br>
+  <% end %>
+  <% if @idea.user == current_user %>
+    <%= link_to 'Flag', review_flag_path(review) %>
+  <% end %>
   <% if can? :destroy, review %>
     <%= link_to 'Delete', [@idea, review],
       method: :delete,
       data: {confirm: 'Are you sure?!!'}%>
   <% end %>
+
 <% end %>
 
 
 
+
+
 <% if user_signed_in? %>
+  <hr>
   <h3> add a Review </h3>
   <%= form_for ([@idea, @review]) do |f| %>
   <div class="form-group">

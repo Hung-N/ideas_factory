@@ -4,6 +4,17 @@ class ReviewsController < ApplicationController
   def new
   end
 
+  def index
+  end
+
+  def flag
+
+    @review = Review.find params[:id]
+    @review.update(is_flagged: !@review.is_flagged)
+    @idea = @review.idea
+    redirect_to idea_path(@idea)
+  end
+
   def create
     @review = Review.new(review_params)
     @idea = Idea.find params[:idea_id]

@@ -9,31 +9,57 @@
   </head>
 
   <body>
-
-    <%= link_to 'All Ideas', ideas_path %>
-    |
-    <%= link_to 'Submit New Idea', new_idea_path %>
-    |
-    <% if user_signed_in? %>
-      <span style='color: red;' class="pull-right"> - Currently logged in as: <%= current_user.email %> - <%= link_to 'Log out', sessions_path, method: :delete %></span>
-    <% else %>
-
-      <%= link_to 'Log In', new_session_path %>
+    <div class="container">
+      <%= link_to 'Idea Factory', home_path %>
       |
-      <%= link_to 'Sign Up', new_user_path %>
-    <% end %>
+      <%= link_to 'All Ideas', ideas_path %>
+      |
+      <%= link_to 'Submit New Idea', new_idea_path %>
+      |
+      <% if user_signed_in? %>
+        <span style='color: red;' class="pull-right"> - Currently logged in as: <%= current_user.email %> - <%= link_to 'Log out', sessions_path, method: :delete %></span>
+      <% else %>
+
+        <%= link_to 'Log In', new_session_path %>
+        |
+        <%= link_to 'Sign Up', new_user_path %>
+      <% end %>
+
+      <!-- <a href="new_user_path"
+         data-toggle="modal"> modal </a>
 
 
 
-    <% if flash[:notice] %>
-      <div class='alert alert-success'><%= flash[:notice] %></div>
-    <% elsif flash[:alert] %>
-      <div class='alert alert-danger'><%= flash[:alert] %></div>
-    <% end %>
 
-    
+         <div class="modal fade" id="test_modal">
+           <div class="modal-header">
+             <a class="close" data-dismiss="modal">&times;</a>
+             <h3>Modal Header</h3>
+           </div>
+           <div class="modal-body">
+             <p>Test Modal</p>
+           </div>
+           <div class="modal-footer">
+             <a href="#" class="btn" data-dismiss="modal">Close</a>
+             <a href="#" class="btn btn-primary">Save Changes</a>
+           </div>
+         </div> -->
 
 
-    <%= yield %>
+
+
+
+      <% if flash[:notice] %>
+        <div class='alert alert-success'><%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class='alert alert-danger'><%= flash[:alert] %></div>
+      <% end %>
+
+
+
+
+
+      <%= yield %>
+    </div>
   </body>
 </html>

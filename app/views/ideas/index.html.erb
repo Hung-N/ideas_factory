@@ -1,18 +1,16 @@
 <h1>List of ideas: </h1>
 
-<table>
-  <tr>
-    <th>Idea</th>
-    <th>Body</th>
-    <th>Author</th>
-  </tr>
+<br>
+<br>
+
+<div class="pull-right">
+  <%= link_to "New Idea", new_idea_path %>
+</div>
+<hr>
 
   <% @ideas.each do |idea| %>
-    <tr>
-      <td><%= idea.title %></td>
-      <td><%= idea.body %></td>
-      <td><%= idea.user.try(:full_name) %></td>
-      <td><%= link_to 'Show', idea_path(idea) %></td>
-    </tr>
-  <% end %>
-</table>
+    <strong><%= link_to "#{idea.title}", idea_path(idea) %></strong>
+    <p> <%= idea.body %> </p>
+    <strong>By: <%= idea.user.try(:full_name) %> </strong>
+    <hr>
+    <% end %>

@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
 
 
-  get 'reviews/new'
-
-  get 'reviews/create'
-
-  get 'reviews/destroy'
 
   resources :users, only: [:new, :create]
 
@@ -18,6 +13,8 @@ Rails.application.routes.draw do
   end
 
   get 'welcome/index', as: :home
+
+  get 'review/hide/:id', to: 'reviews#flag', as: 'review_flag'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
