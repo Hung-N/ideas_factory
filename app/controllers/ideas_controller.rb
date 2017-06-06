@@ -46,13 +46,13 @@ class IdeasController < ApplicationController
   end
 
   def destroy
-    # if can? :destroy, @idea
-    #   @idea.destroy
-    #   redirect_to @idea, notice: "Idea has been Removed"
-    # else
-    #   flash[:alert] = 'Access Denied. Only the owner may delete this!'
-    #   redirect_to @idea
-    # end
+    if can? :destroy, @idea
+      @idea.destroy
+      redirect_to @idea, notice: "Idea has been Removed"
+    else
+      flash[:alert] = 'Access Denied. Only the owner may delete this!'
+      redirect_to @idea
+    end
   end
 
   private

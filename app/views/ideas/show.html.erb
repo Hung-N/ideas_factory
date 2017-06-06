@@ -19,20 +19,24 @@
   <hr>
   <% if review.is_flagged %>
     <p><strong> *This review has been flagged for removal* </strong></p>
+    <span class="glyphicon glyphicon-flag" style="color: red"></span>
   <% else %>
     <p><%= review.user.try(:full_name) %> says: </p>
     <p><%= review.body %></p>
     <br>
   <% end %>
   <% if @idea.user == current_user %>
-    <%= link_to 'Flag', review_flag_path(review) %>
+    <% if !review.is_flagged %>
+      <%= link_to 'Flag', review_flag_path(review) %>
+    <% else %>
+      <%= link_to 'Unflag', review_flag_path(review) %>
+    <% end %>
   <% end %>
   <% if can? :destroy, review %>
     <%= link_to 'Delete', [@idea, review],
       method: :delete,
       data: {confirm: 'Are you sure?!!'}%>
   <% end %>
-
 <% end %>
 
 

@@ -4,7 +4,8 @@
 <br>
 
 <div class="pull-right">
-  <%= link_to "New Idea", new_idea_path %>
+  <div class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" data-remote="url.html">New Idea</div>
+  <%# link_to "New Idea", new_idea_path %>
 </div>
 <hr>
 
@@ -14,3 +15,54 @@
     <strong>By: <%= idea.user.try(:full_name) %> </strong>
     <hr>
     <% end %>
+
+
+
+    <%= form_for :idea, url: ideas_path do |f| %>
+      <div class="form-group">
+        <%= f.label :title %><br>
+        <%= f.text_field :title, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :body %><br>
+        <%= f.text_area :body, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit %>
+      </div>
+    <% end %>
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Submit a New Idea</h4>
+      </div>
+      <div class="modal-body">
+        <%= form_for :idea, url: ideas_path do |f| %>
+          <div class="form-group">
+            <%= f.label :title %><br>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :body %><br>
+            <%= f.text_area :body, class: "form-control" %>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"><%= f.submit %></button>
+      </div>
+    </div><!-- /.modal-content -->
+    <% end %>
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
