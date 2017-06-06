@@ -12,8 +12,12 @@
   <% @ideas.each do |idea| %>
     <strong><%= link_to "#{idea.title}", idea_path(idea) %></strong>
     <p> <%= idea.body %> </p>
-    <strong>By: <%= idea.user.try(:full_name) %> </strong>
+    <p><strong>By: <%= idea.user.try(:full_name) %> </strong></p>
+    <span> Likes: <%= idea.likes %><%= link_to 'like', like_idea_path(idea),  class: "btn btn-success btn-xs pull-right" %> </span>
+
     <hr>
+
+
     <% end %>
 
 

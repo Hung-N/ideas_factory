@@ -1,15 +1,23 @@
 class IdeasController < ApplicationController
 
   before_action :authenticate_user!, except: [:index, :show, :edit]
-  before_action :find_idea, only: [:show, :update, :edit, :destroy]
+  before_action :find_idea, only: [:show, :update, :edit, :destroy, :like]
 
   def index
     @ideas = Idea.all
 
   end
 
+
   def new
     @idea = Idea.new
+  end
+
+
+  def like
+    @likes = @idea.likes += 1
+    @idea.update(likes: @likes)
+    redirect_to ideas_path
   end
 
 
@@ -45,6 +53,7 @@ class IdeasController < ApplicationController
     end
   end
 
+
   def destroy
     if can? :destroy, @idea
       @idea.destroy
@@ -55,11 +64,14 @@ class IdeasController < ApplicationController
     end
   end
 
+
   private
+
 
   def find_idea
     @idea = Idea.find(params[:id])
   end
+
 
   def idea_params
     idea_params = params.require(:idea).permit([:title, :body, :user_id])

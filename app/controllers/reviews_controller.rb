@@ -8,7 +8,6 @@ class ReviewsController < ApplicationController
   end
 
   def flag
-
     @review = Review.find params[:id]
     @review.update(is_flagged: !@review.is_flagged)
     @idea = @review.idea

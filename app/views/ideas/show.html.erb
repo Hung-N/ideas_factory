@@ -9,6 +9,7 @@
                                               data: { confirm: 'Are you sure?'} %>
 <% end %>
 
+
 <% if can? :edit, @idea %>
   <%= link_to 'Edit', edit_idea_path(@idea) %>
 <% end %>
@@ -33,12 +34,14 @@
       <p><%= review.body %></p>
   <% end %>
 
+
   <% if can? :destroy, review %>
     <%= link_to 'Delete', [@idea, review],
       method: :delete,
       data: {confirm: 'Are you sure?!!'}%>
   <% end %>
 <% end %>
+
 
 <% if user_signed_in? %>
   <hr>
